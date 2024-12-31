@@ -15,23 +15,23 @@ function getCookie(cname) {
 }
 
 // Contenido de la página
-let principal = document.querySelector(".principal").textContent;
-let saludoUsuario = document.querySelector(".saludo").textContent;
-let ultimaVez = document.querySelector(".ultima_conexion").textContent;
+let principal = document.querySelector(".principal");
+let saludoUsuario = document.querySelector(".saludo");
+let ultimaVez = document.querySelector(".ultima_conexion");
 
 // Valor de la cookie
-let valorCookie = getCookie("victor");
+let valorCookie = getCookie("victor@correo.yes");
 
 if(valorCookie){
     // Desglosamos el JSON para utilizar sus variables con sus respectivos valores
     let valoresUsuario = JSON.parse(valorCookie);
 
     // Imprimos los datos por pantalla
-    saludoUsuario = "Hola "+valoresUsuario.username;
-    ultimaVez = "La última vez que entraste fue el "+valoresUsuario.fecha_dia+" a las "+valoresUsuario.fecha_hora;
+    saludoUsuario.textContent = "Hola "+valoresUsuario.username;
+    ultimaVez.textContent = "La última vez que entraste fue el "+valoresUsuario.fecha_dia+" a las "+valoresUsuario.fecha_hora;
 } else {
     // Por si no se encuentra la cookie
-    principal = "No existes :(";
+    principal.textContent = "No existes :(";
 }
 
 console.log(principal);

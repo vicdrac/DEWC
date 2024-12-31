@@ -3,33 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles/screen3.css">
     <title>Document</title>
 </head>
 <body>
     <div class="formulario">
         <form action="#">
             <label for="nombre_pregunnta">Pregunta   </label>
-            <input type="text" name="nombre_pregunnta" required>
+            <input type="text" name="nombre_pregunnta" id="nombre_pregunnta">
 
             <br>
             <br>
 
             <fieldset>
-                <label for="respuesta">Verdadero  </label>
-                <input type="radio" name="respuesta" value="verdadero" required>
-    
-                <label for="respuesta">Falso</label>
-                <input type="radio" name="respuesta" value="falso" required>
+                <label for="respuesta-verdadero">Verdadero</label>
+                <input type="radio" id="respuesta-verdadero" name="respuesta" value="verdadero">
+
+                <label for="respuesta-falso">Falso</label>
+                <input type="radio" id="respuesta-falso" name="respuesta" value="falso">
             </fieldset>
 
             <br>
             <br>
 
             <label for="puntuacion">Puntuación</label>
-            <input type="number" min="0" max="9" name="puntuacion" required>
+            <input type="number" min="0" max="9" name="puntuacion" id="puntuacion">
 
-            <button>Atrás</button>      
-            <button>Guardar</button>
+            <button type="button" class="atras">Atrás</button>      
+            <button type="button" class="guardar">Guardar</button>
         </form>
     </div>
     <div class="listado">
