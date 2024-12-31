@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="formulario">
+        <form action="#">
+            <label for="nombre_pregunnta">Pregunta   </label>
+            <input type="text" name="nombre_pregunnta" required>
+
+            <br>
+            <br>
+
+            <fieldset>
+                <label for="respuesta">Verdadero  </label>
+                <input type="radio" name="respuesta" value="verdadero" required>
+    
+                <label for="respuesta">Falso</label>
+                <input type="radio" name="respuesta" value="falso" required>
+            </fieldset>
+
+            <br>
+            <br>
+
+            <label for="puntuacion">Puntuación</label>
+            <input type="number" min="0" max="9" name="puntuacion" required>
+
+            <button>Atrás</button>      
+            <button>Guardar</button>
+        </form>
+    </div>
+    <div class="listado">
+        <table>
+            <tr>
+                <td>Pregunta</td>
+                <td>Respuesta</td>
+                <td>Puntuación</td>
+                <td>Estado</td>
+            </tr>
+        </table>
+    </div>
+    <script src="screen3.js"></script>
+</body>
+</html>

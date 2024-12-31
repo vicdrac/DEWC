@@ -1,0 +1,22 @@
+body {
+    margin: 0;
+    height: 100vh;
+    background-color: black;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: Arial, sans-serif;
+    font-size: 1.5rem;
+    text-align: center;
+}
+
+.form{
+    display: none;
+}
+
+.mensaje-validacion {
+    margin-top: 10px;
+    font-size: 16px;
+    font-weight: bold;
+}
