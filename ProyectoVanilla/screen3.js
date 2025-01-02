@@ -39,7 +39,6 @@ function agregarFila(preguntaObj) {
 
 
 
-
 // Valor de la cookie
 let valorCookie = getCookie("victor@correo.yes");
 
@@ -108,9 +107,34 @@ guardar.addEventListener('click', () => {
 });
 
 
-document.addEventListener("DOMContentLoaded", () => {
+
+// Mostrar la tabla
+function mostrarTabla(){
+    const tabla = document.querySelector("table");
+    const texto = document.querySelector("p");
+
+    texto.style.display = "none";
+    tabla.style.display = "block";
+
+    valores_usuario.preguntas.forEach((pregunta) => agregarFila(pregunta));
+}
+
+// Mostrar preguntas
+function mostrarPreguntas(retraso = false) {
     // Mostrar las preguntas existentes de la cookie, si existen
     if (valores_usuario.preguntas) {
-        valores_usuario.preguntas.forEach((pregunta) => agregarFila(pregunta));
+        // Mostrar con retraso o sin, según se indique 
+        if (!retraso) {
+            mostrarTabla();
+        } else {
+            setTimeout(()=>mostrarTabla(),5000);
+        }
     }
+}
+
+// Cargar preguntas
+document.addEventListener("DOMContentLoaded", () => {
+    let retraso = true;
+    // Mostrar las preguntas con retraso
+    mostrarPreguntas(retraso);
 });

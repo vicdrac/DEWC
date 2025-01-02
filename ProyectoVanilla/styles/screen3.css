@@ -12,6 +12,7 @@ body {
 
 table{
     max-height: 500px;
+    display: none;
 }
 
 /* .listado{
