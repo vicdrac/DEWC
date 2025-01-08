@@ -12,7 +12,7 @@ function obtenerFecha(){
     const fecha = new Date();
 
     const dia = fecha.getDate(); 
-    const mes = fecha.getMonth(); 
+    const mes = fecha.getMonth()+1; 
     const ano = fecha.getFullYear();
 
     return `${dia}-${mes}-${ano}`;
@@ -57,6 +57,7 @@ setTimeout(()=>cambiarAspecto(),5000);
 // Comprobacion usuario correcto y guardar datos en cookie
 function validarUsuario() {
     const usuario = document.querySelector("#usuario").value.trim();
+    const usuarioCookie = "User_"+usuario;
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const mensaje_validacion = document.querySelector(".mensaje_validacion");
 
@@ -78,7 +79,7 @@ function validarUsuario() {
         const user_JSON = JSON.stringify(valores_usuario);
 
         // Creamos la cookie 
-        setCookie(usuario, user_JSON, 7);
+        setCookie(usuarioCookie, user_JSON, 7);
 
         // Redireccionamiento a la siguiente página de nuestra web
         window.location.href = "screen2.html";
@@ -91,5 +92,5 @@ function validarUsuario() {
 }
 
 // Enviar formularip
-const form = document.querySelector('form');
-form.addEventListener('click', validarUsuario);
+const button = document.querySelector('button');
+button.addEventListener('click', validarUsuario);

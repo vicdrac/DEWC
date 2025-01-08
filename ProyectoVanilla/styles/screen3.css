@@ -1,27 +1,43 @@
 body {
     margin: 0;
-    height: 100vh;
     background-color: white;
     color: black;
     display: grid;
     grid-template-columns: 50% 50%;
     font-family: Arial, sans-serif;
-    font-size: 1.5rem;
+    font-size:  1rem;
     text-align: center;
 }
 
-table{
-    max-height: 500px;
-    display: none;
-}
+    .formulario{
+        height: auto;
+        display: flex;
+        justify-content: center;
+        margin-top: 1.5vh;
+    }
 
-/* .listado{
-    display: flex;
-    justify-content: center;
-    text-align: center;
-} */
+    .listado{
+        height: auto;
+        display: flex;
+        justify-content: center;
+        margin-top: 1.5vh;
+    }  
 
-td{
-   border: 2px solid black; 
-   padding: 5px 10px 5px 10px;
-}
+        table{
+            border-collapse: collapse;
+            display: block;
+        }
+
+            tr:nth-child(1){
+                border-bottom: 2px dotted black;
+            }
+
+            td:nth-child(4){
+                padding-left: 4vw;
+            }
+
+            td{
+                height: auto;
+                padding: 0.5vh 1vw 0.5vh 1vw;
+            }
+

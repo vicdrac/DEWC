@@ -19,8 +19,23 @@ let principal = document.querySelector(".principal");
 let saludoUsuario = document.querySelector(".saludo");
 let ultimaVez = document.querySelector(".ultima_conexion");
 
+// Encontrar cookie del usuario actual
+function getUserCookie(){
+    // Obtener todas las cookies
+    const cookies = document.cookie.split(';');
+
+    // Buscamos la cookie específica del usuario
+    const userCookie = cookies.find((cookie) => cookie.trim().startsWith("User_"));
+
+    // Si la cookie existe y tiene datos, devolvemos el valor
+    if(userCookie){
+        const name = userCookie.split('=')[0];
+        return name.trim();
+    }
+}
+
 // Valor de la cookie
-let valorCookie = getCookie("victor@correo.yes");
+let valorCookie = getCookie(getUserCookie());
 
 if(valorCookie){
     // Desglosamos el JSON para utilizar sus variables con sus respectivos valores
