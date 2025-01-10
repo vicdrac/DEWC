@@ -7,6 +7,24 @@ function setCookie(cname, cvalue, exdays) {
     document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
 }
 
+// Recoger una cookie
+function getCookie(cname) {
+    var name = cname + "=";
+    var ca = document.cookie.split(';');
+    for(var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
+    }
+    return "";
+}
+
+
+
 // Obtener fecha actual
 function obtenerFecha(){
     const fecha = new Date();
@@ -29,6 +47,8 @@ function obtenerHora() {
     return `${horas}:${minutos}:${segundos}`; 
 }
 
+
+
 // Mostrar el formulario y ocultar el mensaje
 aspectoCambiado = false; 
 function cambiarAspecto() {
@@ -44,6 +64,8 @@ function cambiarAspecto() {
     form.style.display = "block";
 };
 
+
+
 // Se ejecuta la funcion cuando pulsamos la combinacion de teclas
 document.addEventListener("keydown", function(event) {
     if (event.ctrlKey && event.key === "b") {
@@ -54,10 +76,13 @@ document.addEventListener("keydown", function(event) {
 // Se ejecuta la funcion cuando pasa el tiempo
 setTimeout(()=>cambiarAspecto(),5000);
 
+
+
+
 // Comprobacion usuario correcto y guardar datos en cookie
 function validarUsuario() {
     const usuario = document.querySelector("#usuario").value.trim();
-    const usuarioCookie = "User_"+usuario;
+    const usuarioCookie = usuario;
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const mensaje_validacion = document.querySelector(".mensaje_validacion");
 
@@ -68,18 +93,32 @@ function validarUsuario() {
         mensaje_validacion.style.color = "white";
         mensaje_validacion.style.backgroundColor = "green";
 
-        // Datos del usuario
-        const valores_usuario = {
-            username: usuario,
-            fecha_dia: obtenerFecha(),
-            fecha_hora: obtenerHora(),
-         };
+        // Obtener cookie
+        let valores_usuario;
+        const cookieActual = getCookie(usuarioCookie);
 
-         // Conversión a JSON
+        // Si existe la cookie, cambiamos los valores, si no, la creamos
+        if(cookieActual){
+            valores_usuario = JSON.parse(cookieActual);
+            valores_usuario.fecha_dia = obtenerFecha();
+            valores_usuario.fecha_hora = obtenerHora();
+        } else {
+            // Datos del usuario
+            valores_usuario = {
+                username: usuario,
+                fecha_dia: obtenerFecha(),
+                fecha_hora: obtenerHora(),
+            };
+        }
+
+        // Conversión a JSON
         const user_JSON = JSON.stringify(valores_usuario);
 
         // Creamos la cookie 
         setCookie(usuarioCookie, user_JSON, 7);
+
+        // Guardamos el nombre de usuario en localStorage para usarlo en la siguiente página
+        localStorage.setItem("username", usuario); 
 
         // Redireccionamiento a la siguiente página de nuestra web
         window.location.href = "screen2.html";
@@ -90,6 +129,8 @@ function validarUsuario() {
         mensaje_validacion.style.backgroundColor = "red";
     }
 }
+
+
 
 // Enviar formularip
 const button = document.querySelector('button');

@@ -1,18 +1,3 @@
-// Encontrar cookie del usuario actual
-function getUserCookie(){
-    // Obtener todas las cookies
-    const cookies = document.cookie.split(';');
-
-    // Buscamos la cookie específica del usuario
-    const userCookie = cookies.find((cookie) => cookie.trim().startsWith("User_"));
-
-    // Si la cookie existe y tiene datos, devolvemos el valor
-    if(userCookie){
-        const name = userCookie.split('=')[0];
-        return name.trim();
-    }
-}
-
 // Obtener el valor de una cookie
 function getCookie(cname) {
     const name = cname + "=";
@@ -64,9 +49,11 @@ function agregarFila(preguntaObj) {
 }
 
 
+// Nombre del usuario
+const username = localStorage.getItem("username");
 
 // Valor de la cookie
-let valorCookie = getCookie(getUserCookie());
+let valorCookie = getCookie(username);
 
 // Si la cookie no existe, inicializamos un objeto vacío
 let valores_usuario = valorCookie ? JSON.parse(valorCookie) : { preguntas: [] };
@@ -75,6 +62,7 @@ let valores_usuario = valorCookie ? JSON.parse(valorCookie) : { preguntas: [] };
 if (!Array.isArray(valores_usuario.preguntas)) {
     valores_usuario.preguntas = [];
 }
+
 
 
 // Botones de guardado y retroceder
@@ -99,19 +87,19 @@ function guardarPregunta(nuevaPregunta){
     return new Promise((resolve, reject) => {
         setTimeout(() => {
             try {
-                // Deshabilitar el boton de atras
-                atras.disabled = true;
-
                 // Aactualizar el estado de la pregunta
                 const preguntaIndex = valores_usuario.preguntas.findIndex(pregunta => pregunta.pregunta === nuevaPregunta.pregunta);
                 if (preguntaIndex !== -1) {
                     valores_usuario.preguntas[preguntaIndex].estado = "OK";
                 }    
                 // Guardar el JSON actualizado en la cookie
-                setCookie(getUserCookie(), JSON.stringify(valores_usuario), 7);
+                setCookie(username, JSON.stringify(valores_usuario), 7);
         
                 // Actualizar el valor de la pregunta en la tabla
                 agregarFila(valores_usuario.preguntas[preguntaIndex]);
+
+                // Habilitar el boton de atras
+                atras.disabled = false;
 
                 resolve();
             } catch (error) {
@@ -120,6 +108,7 @@ function guardarPregunta(nuevaPregunta){
         }, 5000);
     })
 };
+
 
 
 // Guardar pregunta en la cookie
@@ -152,17 +141,25 @@ guardar.addEventListener('click', () => {
     // Mostrar la pregunta en la tabla
     agregarFila(nuevaPregunta);
 
+    // Deshabilitar el boton de retroceder
+    atras.disabled = true;
+
     // Guardar la pregunta tanto en el JSON como en la cookie
     guardarPregunta(nuevaPregunta).then(() => {
+        // Habilitar el boton de retroceder
+        atras.disabled = false;
     
         }).catch((error) => {
             console.error("Error al guardar la pregunta:", error);
             // Actualizar la fila con el estado de la pregunta
             nuevaPregunta.estado = "ERROR";
             agregarFila(nuevaPregunta);
-    
+            // Habilitar el boton de retroceder
+            atras.disabled = true;
+            
     });
 });
+
 
 
 document.addEventListener("DOMContentLoaded", () => {

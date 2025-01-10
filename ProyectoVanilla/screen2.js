@@ -14,28 +14,21 @@ function getCookie(cname) {
     return "";
 }
 
+
+
 // Contenido de la página
 let principal = document.querySelector(".principal");
 let saludoUsuario = document.querySelector(".saludo");
 let ultimaVez = document.querySelector(".ultima_conexion");
 
-// Encontrar cookie del usuario actual
-function getUserCookie(){
-    // Obtener todas las cookies
-    const cookies = document.cookie.split(';');
 
-    // Buscamos la cookie específica del usuario
-    const userCookie = cookies.find((cookie) => cookie.trim().startsWith("User_"));
 
-    // Si la cookie existe y tiene datos, devolvemos el valor
-    if(userCookie){
-        const name = userCookie.split('=')[0];
-        return name.trim();
-    }
-}
-
+// Nombre del usuario
+const username = localStorage.getItem("username");
 // Valor de la cookie
-let valorCookie = getCookie(getUserCookie());
+let valorCookie = getCookie(username);
+
+
 
 if(valorCookie){
     // Desglosamos el JSON para utilizar sus variables con sus respectivos valores
@@ -48,5 +41,3 @@ if(valorCookie){
     // Por si no se encuentra la cookie
     principal.textContent = "No existes :(";
 }
-
-console.log(principal);
